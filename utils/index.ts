@@ -56,4 +56,4 @@ export const updateSearchParam = (type: string, value: string) => {
   return newPathname;
 };
 
-export const getDefaultYear = () => new Date().getFullYear() - 1;
+export const getDefaultYear = () => String(new Date().getFullYear() - 1);
