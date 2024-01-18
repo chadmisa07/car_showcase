@@ -4,7 +4,7 @@ export async function fetchCars(filters: FilterProps) {
   const { manufacturer, limit, year, model, fuel } = filters;
 
   const headers = {
-    "X-RapidAPI-Key": "54048ed3aemsh5e8b154da08a7ddp13bc0bjsn5bd15cf8ef23",
+    "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY || "",
     "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
   };
 
@@ -36,7 +36,10 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   const url = new URL("https://cdn.imagin.studio/getimage");
 
   const { make, year, model } = car;
-  url.searchParams.append("customer", "hrjavascript-mastery");
+  url.searchParams.append(
+    "customer",
+    process.env.NEXT_PUBLIC_IMAGIN_API_KEY || ""
+  );
   url.searchParams.append("make", make);
   url.searchParams.append("modelFamily", model.split(" ")[0]);
   url.searchParams.append("modelYear", `${year}`);
@@ -52,3 +55,5 @@ export const updateSearchParam = (type: string, value: string) => {
   const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
   return newPathname;
 };
+
+export const getDefaultYear = () => new Date().getFullYear() - 1;

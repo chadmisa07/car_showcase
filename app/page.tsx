@@ -2,9 +2,10 @@
 import { Hero } from "@/components";
 import Image from "next/image";
 import { CustomFilter, SearchBar, CarCard, ShowMore } from "@/components";
-import { fetchCars } from "@/utils";
+import { fetchCars, getDefaultYear } from "@/utils";
 import { fuels, yearsOfProduction } from "@/constants";
 import { useEffect, useState } from "react";
+import Loader from "@/components/Loader";
 
 export default function Home({ searchParams }: { searchParams: any }) {
   const [allCars, setAllCars] = useState([]);
@@ -13,7 +14,7 @@ export default function Home({ searchParams }: { searchParams: any }) {
     manufacturer: "",
     model: "",
     fuel: "",
-    year: "2022",
+    year: getDefaultYear(),
     limit: 10,
   });
 
@@ -75,20 +76,14 @@ export default function Home({ searchParams }: { searchParams: any }) {
         {allCars.length > 0 ? (
           <section>
             <div className="home__cars-wrapper">
-              {allCars?.map((car) => (
-                <CarCard key={car} car={car} />
+              {allCars?.map((car, key) => (
+                <CarCard key={key} car={car} />
               ))}
             </div>
 
             {loading && (
               <div className="mt-16 w-full flex-center">
-                <Image
-                  src="/loader.svg"
-                  alt="loader"
-                  width={50}
-                  height={50}
-                  className="object-container"
-                />
+                <Loader />
               </div>
             )}
 

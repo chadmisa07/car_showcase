@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Listbox, Transition } from "@headlessui/react";
 import { CustomFilterProps } from "@/types";
-import { updateSearchParam } from "@/utils";
+import { updateSearchParam, getDefaultYear } from "@/utils";
 
 const CustomFilter = ({
   title,
@@ -24,7 +24,10 @@ const CustomFilter = ({
         value={selected}
         onChange={(e) => {
           setSelected(e);
-          doUpdateFilter(title, e.value);
+          doUpdateFilter(
+            title,
+            title === "year" && e.value === "" ? getDefaultYear() : e.value
+          );
         }}
       >
         <div className="relative w-fit z-10">

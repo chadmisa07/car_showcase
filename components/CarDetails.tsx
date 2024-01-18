@@ -39,7 +39,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailProps) => {
                 leaveFrom="opacity-100 scal-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white p-6 text-left shadow-xl transition-all flex-col gap-5">
+                <Dialog.Panel className="car-details__container relative w-full max-w-lg transform rounded-2xl bg-white p-6 text-left shadow-xl transition-all flex-col gap-5 ">
                   <button
                     type="button"
                     className="absolute top-2 right-2 z-10 w-fit p-2 bg-primary-blue-100 rounded-full"
@@ -85,7 +85,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailProps) => {
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100">
                         <Image
-                          src={generateCarImageUrl(car, 13)}
+                          src={generateCarImageUrl(car, "13")}
                           alt="Car"
                           fill
                           priority
@@ -95,12 +95,12 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailProps) => {
                     </div>
                   </div>
 
-                  <div className="flex flex-1 flex-col gap-2">
+                  <div className="flex flex-1 flex-col gap-2 mt-4 mb-4">
                     <h2 className="font-semibold text-xl capitalize">
                       {car.make} {car.model}
                     </h2>
 
-                    <div className="flex flex-wrap gap-4">
+                    <div className="car-details__info flex flex-wrap gap-4 max-h-[30vh] overflow-y-auto">
                       {Object.entries(car).map(([key, value]) => (
                         <div
                           className="flex  justify-between gap-5 w-full text-right"
